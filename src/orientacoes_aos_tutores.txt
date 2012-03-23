@@ -1,0 +1,22 @@
+AI-0101
+-------
+
+Objetivo da Atividade Interativa (AI): exercitar as propriedades existentes entre f(x), f'(x) e f''(x) no que concerne os máximos, mínimos e pontos de inflexão de f(x).
+
+Objetivo do usuário: organizar os gráficos (peças do quebra-cabeça) de modo que abaixo de cada f(x) estejam sua derivada f'(x) e sua segunda derivada f''(x), nesta ordem.
+
+Note que para isso a primeira linha do quebra-cabeça deve conter apenas as funções, a segunda linha deve conter apenas as derivadas e a terceira, apenas as derivadas de ordem dois.
+
+Resolução: as três funções dadas são sempre as mesmas:
+
+Função 1: "parábola" com concavidade para cima. Esta função exibe um MÍNIMO e, por isso, abaixo dela deve haver um f'(x) que é uma reta estritamente CRESCENTE. Por conseguinte, f''(x) deve ser uma RETA HORIZONTAL que passa por algum y = f''(0) > 0.
+
+Função 2: "parábola" com concavidade para baixo. Esta função exibe um MÁXIMO e, por isso, abaixo dela deve haver um f'(x) que é uma reta estritamente DECRESCENTE. E por conseguinte, f''(x) deve ser uma RETA HORIZONTAL que passa por algum y = f''(0) < 0.
+
+Função 3: função polinomial de ordem 3, que exibe um PONTO DE INFLEXÃO. Por isso, f'(x) deve apresentar um mínimo ou um máximo na mesma abscissa (no caso é um mínimo). Finalmente, f''(x) deve ser uma reta crescente ou decrescente (no caso é crescente).
+
+Atenção que há duas "parábolas" com concavidade para cima. A primeira é a f(x) na "Função 1" acima. A segunda é a f'(x) na "Função 3". Para distinguir uma da outra é preciso prestar atenção à abscissa do mínimo: no primeiro caso ocorre em x = 0; no segundo ocorre em x = 0.
+
+Observações:
+1) Esta AI usa SCORM para notificar o LMS (moodle) quanto ao aproveitamento do usuário, numa escala de 0 a 100 (inteiros apenas).
+2) Para orientações quanto às intereções com a AI, veja o menu de orientações (botão "?").
