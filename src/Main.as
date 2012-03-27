@@ -491,7 +491,7 @@
 										  "Na primeira linha você deve colocar as funções, f(x).",
 										  "Na segunda linha você deve colocar as derivadas de primeira ordem, f'(x), imediatamente abaixo da função que deu origem a ela.",
 										  "Finalmente, na terceira linha você deve colocar as derivadas de ordem dois, f''(x).",
-										  "Quando você tiver concluído, pressione o botão \"terminei\" para verificar sua resposta.",
+										  "Quando você tiver concluído, pressione o botão \"OK\" para verificar sua resposta.",
 										  "As peças destacadas em vermelho estão erradas; aquelas em verde estão corretas.",
 										  "Você pode tentar quantas vezes quiser, basta pressionar em \"novo exercício\"."];
 		
@@ -508,21 +508,21 @@
 				balao.visible = false;
 				
 				pointsTuto = 	[new Point(250, 170),
-								new Point(250, 270),
-								new Point(250, 270),
-								new Point(250, 270),
-								new Point(250, 270),
-								new Point(250, 270),
-								new Point(250, 270),
+								new Point(250, 170),
+								new Point(100, 133),
+								new Point(100, 249),
+								new Point(100, 369),
+								new Point(130, 30),
+								new Point(250, 170),
 								new Point(435, 270)];
 								
 				tutoBaloonPos = [["", ""],
+								["", ""],
 								[CaixaTexto.LEFT, CaixaTexto.CENTER],
 								[CaixaTexto.LEFT, CaixaTexto.CENTER],
 								[CaixaTexto.LEFT, CaixaTexto.CENTER],
-								[CaixaTexto.LEFT, CaixaTexto.CENTER],
-								[CaixaTexto.LEFT, CaixaTexto.CENTER],
-								[CaixaTexto.LEFT, CaixaTexto.CENTER],
+								[CaixaTexto.LEFT, CaixaTexto.FIRST],
+								["", ""],
 								[CaixaTexto.TOP, CaixaTexto.FIRST]];
 			}
 			

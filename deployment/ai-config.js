@@ -1,8 +1,8 @@
 // JavaScript Document
 var flashvars = {};
 flashvars.ai = "AI-0101.swf";
-flashvars.width = "640";
-flashvars.height = "480";
+flashvars.width = "700";
+flashvars.height = "500";
 
 // Parâmetros do player (Flash)
 var params = {};
