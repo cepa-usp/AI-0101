@@ -1,4 +1,4 @@
-package  
+﻿package  
 {
 	import cepa.utils.ToolTip;
 	import fl.transitions.easing.None;
@@ -20,9 +20,7 @@ package
 	 */
 	public class Main extends MovieClip
 	{
-		private const PONTOS:Array = [new Point(165, 124), new Point(320, 124), new Point(475, 124),
-									  new Point(165, 240), new Point(320, 240), new Point(475, 240),
-									  new Point(165, 356), new Point(320, 356), new Point(475, 356)];
+		private var PONTOS:Array;
 									 
 		private const PECAS:Array = [L1C1, L1C2, L1C3, L2C1, L2C2, L2C3, L3C1, L3C2, L3C3];
 		private var randomPoint:HumanRandom;
@@ -49,23 +47,28 @@ package
 		
 		private function init(e:Event):void 
 		{
+			PONTOS = [new Point(funcao1.x, funcao1.y), new Point(funcao2.x, funcao2.y), new Point(funcao3.x, funcao3.y),
+			new Point(funcao4.x, funcao4.y), new Point(funcao5.x, funcao5.y), new Point(funcao6.x, funcao6.y),
+			new Point(funcao7.x, funcao7.y), new Point(funcao8.x, funcao8.y), new Point(funcao9.x, funcao9.y)];
+			
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			botoes.resetButton.addEventListener(MouseEvent.CLICK, reset);
 			botoes.tutorialBtn.addEventListener(MouseEvent.CLICK, iniciaTutorial);
-			botaoPlay.addEventListener(MouseEvent.CLICK, responder);
-			verResposta.addEventListener(MouseEvent.CLICK, resposta);
+			entrada.botaoPlay.addEventListener(MouseEvent.CLICK, responder);
 			botoes.orientacoesBtn.addEventListener(MouseEvent.CLICK, function () { infoScreen.visible = true; setChildIndex(infoScreen, numChildren - 1); } );
 			infoScreen.addEventListener(MouseEvent.CLICK, function () { infoScreen.visible = false;} );
 			botoes.creditos.addEventListener(MouseEvent.CLICK, function () { aboutScreen.visible = true; setChildIndex(aboutScreen, numChildren - 1); } );
 			aboutScreen.addEventListener(MouseEvent.CLICK, function () { aboutScreen.visible = false;} );
 			confirmacao.addEventListener(MouseEvent.CLICK, confirma);
 			
+			entrada.verResposta.mouseEnabled = false;
+			
 			confirmacao.visible = false;
 			infoScreen.visible = false;
 			aboutScreen.visible = false;
-			verResposta.visible = false;
+			entrada.verResposta.alpha = 0.3;
 			
-			this.scrollRect = new Rectangle(0, 0, 640, 480);
+			this.scrollRect = new Rectangle(0, 0, 700, 500);
 			
 			addEventListeners();
 			
@@ -102,8 +105,10 @@ package
 		
 		private function resposta(e:MouseEvent):void 
 		{
-			botaoPlay.mouseEnabled = false;
-			botaoPlay.alpha = 0.5;
+			entrada.botaoPlay.mouseEnabled = false;
+			entrada.verResposta.mouseEnabled = false;
+			entrada.verResposta.alpha = 0.3;
+			entrada.botaoPlay.alpha = 0.3;
 			
 			funcao1.x = PONTOS[0].x;
 			funcao1.y = PONTOS[0].y;
@@ -168,7 +173,10 @@ package
 		private function responder(e:MouseEvent):void 
 		{
 			pontuacao = 0;
-			verResposta.visible = false;
+			entrada.verResposta.alpha = 1;
+			entrada.verResposta.mouseEnabled = true;
+			entrada.verResposta.removeEventListener(MouseEvent.CLICK, resposta);
+			entrada.verResposta.addEventListener(MouseEvent.CLICK, resposta);
 			
 			for (var i:int = 1; i <= 9; i++) this["funcao" + String(i)].filters = null;
 			errouF1 = errouF2 = errouF3 = false;
@@ -208,9 +216,10 @@ package
 			
 			pontuacao = Math.round(pontuacao * (100 / 9));
 			
-			pontuacao_tf.text = String(pontuacao);
+			entrada.pontuacao_tf.text = String(pontuacao);
 			
-			verResposta.visible = true;
+			entrada.verResposta.alpha = 1;
+			entrada.verResposta.mouseEnabled = true;
 			
 			if (valendo && !completed) {
 				score = pontuacao;
@@ -233,6 +242,7 @@ package
 			{
 				dragging = e.currentTarget as MovieClip;
 				setChildIndex(dragging, numChildren - 1);
+				setChildIndex(entrada, numChildren - 1);
 				setChildIndex(balao, numChildren - 1);
 				startX = dragging.x;
 				startY = dragging.y;
@@ -313,13 +323,16 @@ package
 		
 		private function reset(e:MouseEvent):void 
 		{
+			entrada.verResposta.removeEventListener(MouseEvent.CLICK, resposta);
+			entrada.verResposta.alpha = 1;
 			randomPoint = new HumanRandom(PONTOS);
 			randomPoint.memory = PONTOS.length;
-			verResposta.visible = false;
+			entrada.verResposta.alpha = 0.3;
+			entrada.verResposta.mouseEnabled = false;
 			pontuacao = 0;
-			pontuacao_tf.text = "0";
-			botaoPlay.mouseEnabled = true;
-			botaoPlay.alpha = 1;
+			entrada.pontuacao_tf.text = "0";
+			entrada.botaoPlay.mouseEnabled = true;
+			entrada.botaoPlay.alpha = 1;
 			sorteiaPontos();
 		}
 		
