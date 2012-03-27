@@ -486,10 +486,14 @@
 		private var pointsTuto:Array;
 		private var tutoBaloonPos:Array;
 		private var tutoPos:int;
-		private var tutoSequence:Array = ["Nesta atividade você deve reproduzir a experiência de Ruben e Kamen, indentificando a origem do oxigênio formado pela fotossíntese: a água ou o dióxido de carbono?",
-										  "Neste recipiente há um pé de feijão exposto à luz e com suprimento controlado de dióxido de carbono e água.",
-										  "Mova o mouse sobre o recipiente para \"ver\" mais de perto as moléculas."];
-										  
+		private var tutoSequence:Array = ["O objetivo desta atividade é relacionar corretamente as funções com suas derivadas.",
+										  "Há três funções f(x) diferentes e você deve identificá-las, bem como suas duas primeiras derivadas, f'(x) e f''(x).",
+										  "Na primeira linha você deve colocar as funções, f(x).",
+										  "Na segunda linha você deve colocar as derivadas de primeira ordem, f'(x), imediatamente abaixo da função que deu origem a ela.",
+										  "Finalmente, na terceira linha você deve colocar as derivadas de ordem dois, f''(x).",
+										  "Quando você tiver concluído, pressione o botão \"terminei\" para verificar sua resposta.",
+										  "As peças destacadas em vermelho estão erradas; aquelas em verde estão corretas.",
+										  "Você pode tentar quantas vezes quiser, basta pressionar em \"novo exercício\"."];
 		
 		/**
 		 * Inicia o tutorial da atividade.
@@ -503,11 +507,21 @@
 				setChildIndex(balao, numChildren - 1);
 				balao.visible = false;
 				
-				pointsTuto = 	[new Point(260, 160),
+				pointsTuto = 	[new Point(250, 170),
+								new Point(250, 270),
+								new Point(250, 270),
+								new Point(250, 270),
+								new Point(250, 270),
+								new Point(250, 270),
 								new Point(250, 270),
 								new Point(435, 270)];
 								
-				tutoBaloonPos = [[CaixaTexto.RIGHT, CaixaTexto.CENTER],
+				tutoBaloonPos = [["", ""],
+								[CaixaTexto.LEFT, CaixaTexto.CENTER],
+								[CaixaTexto.LEFT, CaixaTexto.CENTER],
+								[CaixaTexto.LEFT, CaixaTexto.CENTER],
+								[CaixaTexto.LEFT, CaixaTexto.CENTER],
+								[CaixaTexto.LEFT, CaixaTexto.CENTER],
 								[CaixaTexto.LEFT, CaixaTexto.CENTER],
 								[CaixaTexto.TOP, CaixaTexto.FIRST]];
 			}

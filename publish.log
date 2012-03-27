@@ -1,5 +1,13 @@
 Copying from /c/Users/Luciano Lucena/Documents/PROJETOS/UNIVESP/GitHub/AI-0101 to cepa@arquivos.atp.usp.br:/work/PUBLICACAO/atividades-interativas/AI-0101
 building file list ... done
+created directory /work/PUBLICACAO/atividades-interativas/AI-0101
+./
+AI-0101.swf
+AI-0101_SCO.zip
+AI_Loader.swf
+ai-config.js
+expressInstall.swf
+index.html
 
-sent 14 bytes  received 12 bytes  10.40 bytes/sec
-total size is 0  speedup is 0.00
+sent 162470 bytes  received 129 bytes  325198.00 bytes/sec
+total size is 162044  speedup is 1.00
