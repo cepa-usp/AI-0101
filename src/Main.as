@@ -38,6 +38,7 @@
 		private var tweenYDragging:Tween;
 		private var tweenXDrop:Tween;
 		private var tweenYDrop:Tween;
+		private var respondido:Boolean = false;
 		
 		public function Main() 
 		{
@@ -52,14 +53,14 @@
 			new Point(funcao7.x, funcao7.y), new Point(funcao8.x, funcao8.y), new Point(funcao9.x, funcao9.y)];
 			
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			botoes.resetButton.addEventListener(MouseEvent.CLICK, reset);
+			botoes.resetButton.addEventListener(MouseEvent.MOUSE_DOWN, reset);
+			entrada.novo.addEventListener(MouseEvent.MOUSE_DOWN, reset);
 			botoes.tutorialBtn.addEventListener(MouseEvent.CLICK, iniciaTutorial);
 			entrada.botaoPlay.addEventListener(MouseEvent.CLICK, responder);
 			botoes.orientacoesBtn.addEventListener(MouseEvent.CLICK, function () { infoScreen.visible = true; setChildIndex(infoScreen, numChildren - 1); } );
 			infoScreen.addEventListener(MouseEvent.CLICK, function () { infoScreen.visible = false;} );
 			botoes.creditos.addEventListener(MouseEvent.CLICK, function () { aboutScreen.visible = true; setChildIndex(aboutScreen, numChildren - 1); } );
 			aboutScreen.addEventListener(MouseEvent.CLICK, function () { aboutScreen.visible = false;} );
-			confirmacao.addEventListener(MouseEvent.CLICK, confirma);
 			
 			entrada.verResposta.mouseEnabled = false;
 			
@@ -96,55 +97,43 @@
 			addChild(infoTT);
 		}
 		
-		private function verificaAtividade():void
-		{
-			if (completed) {
-				valendo = false;
-			}
-		}
-		
 		private function resposta(e:MouseEvent):void 
 		{
+			iniciaTutorial2();
+			
 			entrada.botaoPlay.mouseEnabled = false;
 			entrada.verResposta.mouseEnabled = false;
 			entrada.verResposta.alpha = 0.3;
 			entrada.botaoPlay.alpha = 0.3;
 			
-			funcao1.x = PONTOS[0].x;
-			funcao1.y = PONTOS[0].y;
+			tweenX = new Tween(funcao1, "x", None.easeNone, funcao1.x, PONTOS[0].x, 0.5, true);
+			tweenY = new Tween(funcao1, "y", None.easeNone, funcao1.y, PONTOS[0].y, 0.5, true);
 			funcao1.filters = [];
-			funcao2.x = PONTOS[1].x;
-			funcao2.y = PONTOS[1].y;
+			tweenX = new Tween(funcao2, "x", None.easeNone, funcao2.x, PONTOS[1].x, 0.5, true);
+			tweenY = new Tween(funcao2, "y", None.easeNone, funcao2.y, PONTOS[1].y, 0.5, true);
 			funcao2.filters = [];
-			funcao3.x = PONTOS[2].x;
-			funcao3.y = PONTOS[2].y;
+			tweenX = new Tween(funcao3, "x", None.easeNone, funcao3.x, PONTOS[2].x, 0.5, true);
+			tweenY = new Tween(funcao3, "y", None.easeNone, funcao3.y, PONTOS[2].y, 0.5, true);
 			funcao3.filters = [];
-			funcao4.x = PONTOS[3].x;
-			funcao4.y = PONTOS[3].y;
+			tweenX = new Tween(funcao4, "x", None.easeNone, funcao4.x, PONTOS[3].x, 0.5, true);
+			tweenY = new Tween(funcao4, "y", None.easeNone, funcao4.y, PONTOS[3].y, 0.5, true);
 			funcao4.filters = [];
-			funcao5.x = PONTOS[4].x;
-			funcao5.y = PONTOS[4].y;
+			tweenX = new Tween(funcao5, "x", None.easeNone, funcao5.x, PONTOS[4].x, 0.5, true);
+			tweenY = new Tween(funcao5, "y", None.easeNone, funcao5.y, PONTOS[4].y, 0.5, true);
 			funcao5.filters = [];
-			funcao6.x = PONTOS[5].x;
-			funcao6.y = PONTOS[5].y;
+			tweenX = new Tween(funcao6, "x", None.easeNone, funcao6.x, PONTOS[5].x, 0.5, true);
+			tweenY = new Tween(funcao6, "y", None.easeNone, funcao6.y, PONTOS[5].y, 0.5, true);
 			funcao6.filters = [];
-			funcao7.x = PONTOS[6].x;
-			funcao7.y = PONTOS[6].y;
+			tweenX = new Tween(funcao7, "x", None.easeNone, funcao7.x, PONTOS[6].x, 0.5, true);
+			tweenY = new Tween(funcao7, "y", None.easeNone, funcao7.y, PONTOS[6].y, 0.5, true);
 			funcao7.filters = [];
-			funcao8.x = PONTOS[7].x;
-			funcao8.y = PONTOS[7].y;
+			tweenX = new Tween(funcao8, "x", None.easeNone, funcao8.x, PONTOS[7].x, 0.5, true);
+			tweenY = new Tween(funcao8, "y", None.easeNone, funcao8.y, PONTOS[7].y, 0.5, true);
 			funcao8.filters = [];
-			funcao9.x = PONTOS[8].x;
-			funcao9.y = PONTOS[8].y;
+			tweenX = new Tween(funcao9, "x", None.easeNone, funcao9.x, PONTOS[8].x, 0.5, true);
+			tweenY = new Tween(funcao9, "y", None.easeNone, funcao9.y, PONTOS[8].y, 0.5, true);
 			funcao9.filters = [];
-		}
-		
-		private function confirma(e:MouseEvent):void 
-		{
-			valendo = true;
-			confirmacao.visible = false;
-			scormExercise = 1;
-			reset(null);
+			
 		}
 		
 		private const GLOW_FILTER:GlowFilter = new GlowFilter(0x008000, 1, 6, 6, 2, 20);
@@ -172,6 +161,7 @@
 		
 		private function responder(e:MouseEvent):void 
 		{
+			
 			pontuacao = 0;
 			entrada.verResposta.alpha = 1;
 			entrada.verResposta.mouseEnabled = true;
@@ -216,16 +206,20 @@
 			
 			pontuacao = Math.round(pontuacao * (100 / 9));
 			
-			entrada.pontuacao_tf.text = String(pontuacao);
+			entrada.pontuacao_tf.text = String(pontuacao) + " de 100";
 			
 			entrada.verResposta.alpha = 1;
 			entrada.verResposta.mouseEnabled = true;
 			
-			if (valendo && !completed) {
-				score = pontuacao;
-				completed = true;
-				save2LMS();
+			if (!respondido) {
+				nTentativas++;
+				score = (score * (nTentativas - 1) + pontuacao) / nTentativas;
+				
+				if (score >= 50) completed = true;
+				commit();
 			}
+			
+			respondido = true;
 		}
 		
 		private function addEventListeners():void
@@ -323,6 +317,9 @@
 		
 		private function reset(e:MouseEvent):void 
 		{
+			if (tweenX.isPlaying) return;
+			
+			respondido = false;
 			entrada.verResposta.removeEventListener(MouseEvent.CLICK, resposta);
 			entrada.verResposta.alpha = 1;
 			randomPoint = new HumanRandom(PONTOS);
@@ -333,6 +330,7 @@
 			entrada.pontuacao_tf.text = "0";
 			entrada.botaoPlay.mouseEnabled = true;
 			entrada.botaoPlay.alpha = 1;
+			iniciaTutorial();
 			sorteiaPontos();
 		}
 		
@@ -346,7 +344,9 @@
 			}
 		}
 		
-		// VARIAVEIS SCORM
+		/*------------------------------------------------------------------------------------------------*/
+		//SCORM:
+		
 		private const PING_INTERVAL:Number = 5 * 60 * 1000; // 5 minutos
 		private var completed:Boolean;
 		private var scorm:SCORM;
@@ -354,7 +354,7 @@
 		private var connected:Boolean;
 		private var score:int;
 		private var pingTimer:Timer;
-		private var valendo:Boolean;
+		private var nTentativas:int = 0;
 		
 		/**
 		 * @private
@@ -366,12 +366,16 @@
 			connected = false;
 			scorm = new SCORM();
 			
+			pingTimer = new Timer(PING_INTERVAL);
+			pingTimer.addEventListener(TimerEvent.TIMER, pingLMS);
+			
 			connected = scorm.connect();
 			
 			if (connected) {
-				
 				// Verifica se a AI já foi concluída.
-				var status:String = scorm.get("cmi.completion_status");				
+				var status:String = scorm.get("cmi.completion_status");	
+				var stringScore:String = scorm.get("cmi.score.raw");
+				var stringTentativas:String = scorm.get("cmi.suspend_data");
 			 
 				switch(status)
 				{
@@ -380,35 +384,26 @@
 					case "unknown":
 					default:
 						completed = false;
-						scormExercise = 0;
-						score = 0;
 						break;
 					
 					// Continuando a AI...
 					case "incomplete":
 						completed = false;
-						
-						scormExercise = int(scorm.get("cmi.location"));
-						if (isNaN(scormExercise)) scormExercise = 0;
-						
-						score = int(scorm.get("cmi.score.raw"));
-						if (isNaN(score)) score = 0;
-						
 						break;
 					
 					// A AI já foi completada.
 					case "completed":
 						completed = true;
-						
-						scormExercise = int(scorm.get("cmi.location"));
-						if (isNaN(scormExercise)) scormExercise = 0;
-						
-						score = int(scorm.get("cmi.score.raw"));
-						if (isNaN(score)) score = 0;
-						
-						setMessage("ATENÇÃO: esta Atividade Interativa já foi completada. Você pode refazê-la quantas vezes quiser, mas não valerá nota.");
 						break;
 				}
+				
+				//unmarshalObjects(mementoSerialized);
+				scormExercise = 1;
+				if (stringScore != "") score = Number(stringScore.replace(",", "."));
+				else score = 0;
+				
+				if (stringTentativas != "") nTentativas = int(stringTentativas);
+				else nTentativas = 0;
 				
 				var success:Boolean = scorm.set("cmi.score.min", "0");
 				if (success) success = scorm.set("cmi.score.max", "100");
@@ -426,19 +421,22 @@
 			}
 			else
 			{
-				setMessage("Esta Atividade Interativa não está conectada a um LMS: seu aproveitamento nela NÃO será salvo.");
+				trace("Esta Atividade Interativa não está conectada a um LMS: seu aproveitamento nela NÃO será salvo.");
 			}
 			
+			//reset();
 		}
 		
 		/**
 		 * @private
 		 * Salva cmi.score.raw, cmi.location e cmi.completion_status no LMS
 		 */ 
-		private function save2LMS ()
+		private function commit()
 		{
 			if (connected)
 			{
+				scorm.set("cmi.exit", "suspend");
+				
 				// Salva no LMS a nota do aluno.
 				var success:Boolean = scorm.set("cmi.score.raw", score.toString());
 
@@ -447,6 +445,9 @@
 
 				// Salva no LMS o exercício que deve ser exibido quando a AI for acessada novamente.
 				success = scorm.set("cmi.location", scormExercise.toString());
+				
+				// Salva no LMS a string que representa a situação atual da AI para ser recuperada posteriormente.
+				success = scorm.set("cmi.suspend_data", String(nTentativas));
 
 				if (success)
 				{
@@ -455,7 +456,7 @@
 				else
 				{
 					pingTimer.stop();
-					setMessage("Falha na conexão com o LMS.");
+					//setMessage("Falha na conexão com o LMS.");
 					connected = false;
 				}
 			}
@@ -467,33 +468,29 @@
 		 */
 		private function pingLMS (event:TimerEvent)
 		{
-			scorm.get("cmi.completion_status");
-		}
-		
-		private function setMessage (message:String = null) : void
-		{
-			if (message)
-			{
-			}
-			else
-			{
-			}
-		}
-		
+			//scorm.get("cmi.completion_status");
+			commit();
+		}		
 //Tutorial
 		private var posQuadradoArraste:Point = new Point();
 		private var balao:CaixaTexto;
+		private var balao2:CaixaTexto;
 		private var pointsTuto:Array;
+		private var pointsTuto2:Array;
 		private var tutoBaloonPos:Array;
+		private var tutoBaloonPos2:Array;
 		private var tutoPos:int;
+		private var tutoPos2:int;
 		private var tutoSequence:Array = ["O objetivo desta atividade é relacionar corretamente as funções com suas derivadas.",
 										  "Há três funções f(x) diferentes e você deve identificá-las, bem como suas duas primeiras derivadas, f'(x) e f''(x).",
 										  "Na primeira linha você deve colocar as funções, f(x).",
 										  "Na segunda linha você deve colocar as derivadas de primeira ordem, f'(x), imediatamente abaixo da função que deu origem a ela.",
 										  "Finalmente, na terceira linha você deve colocar as derivadas de ordem dois, f''(x).",
-										  "Quando você tiver concluído, pressione o botão \"OK\" para verificar sua resposta.",
-										  "As peças destacadas em vermelho estão erradas; aquelas em verde estão corretas.",
+										  "Quando você tiver concluído, pressione o botão \"OK\" para verificar sua resposta."];
+		private var tutoSequence2:Array = ["As peças destacadas em vermelho estão erradas; aquelas em verde estão corretas.",
 										  "Você pode tentar quantas vezes quiser, basta pressionar em \"novo exercício\"."];
+										  private var tweenX:Tween;
+										  private var tweenY:Tween;
 		
 		/**
 		 * Inicia o tutorial da atividade.
@@ -512,18 +509,14 @@
 								new Point(100, 133),
 								new Point(100, 249),
 								new Point(100, 369),
-								new Point(130, 30),
-								new Point(250, 170),
-								new Point(435, 270)];
+								new Point(130, 30)];
 								
 				tutoBaloonPos = [["", ""],
 								["", ""],
 								[CaixaTexto.LEFT, CaixaTexto.CENTER],
 								[CaixaTexto.LEFT, CaixaTexto.CENTER],
 								[CaixaTexto.LEFT, CaixaTexto.CENTER],
-								[CaixaTexto.LEFT, CaixaTexto.FIRST],
-								["", ""],
-								[CaixaTexto.TOP, CaixaTexto.FIRST]];
+								[CaixaTexto.LEFT, CaixaTexto.FIRST]];
 			}
 			
 			balao.removeEventListener(Event.CLOSE, closeBalao);
@@ -531,6 +524,33 @@
 			balao.setPosition(pointsTuto[tutoPos].x, pointsTuto[tutoPos].y);
 			balao.addEventListener(Event.CLOSE, closeBalao);
 			balao.visible = true;
+			if (balao2 != null) balao2.visible = false;
+			setChildIndex(balao, numChildren - 1);
+		}
+		
+		private function iniciaTutorial2(e:MouseEvent = null):void 
+		{
+			tutoPos2 = 0;
+			if(balao2 == null){
+				balao2 = new CaixaTexto(true);
+				addChild(balao2);
+				setChildIndex(balao2, numChildren - 1);
+				balao2.visible = false;
+				
+				pointsTuto2 = 	[new Point(250, 170),
+								new Point(130, 102)];
+								
+				tutoBaloonPos2 = [["", ""],
+								[CaixaTexto.LEFT, CaixaTexto.FIRST]];
+			}
+			
+			balao2.removeEventListener(Event.CLOSE, closeBalao2);
+			balao2.setText(tutoSequence2[tutoPos2], tutoBaloonPos2[tutoPos2][0], tutoBaloonPos2[tutoPos2][1]);
+			balao2.setPosition(pointsTuto2[tutoPos2].x, pointsTuto2[tutoPos2].y);
+			balao2.addEventListener(Event.CLOSE, closeBalao2);
+			if (balao != null) balao.visible = false;
+			balao2.visible = true;
+			setChildIndex(balao2, numChildren - 1);
 		}
 		
 		private function closeBalao(e:Event):void 
@@ -539,9 +559,23 @@
 			if (tutoPos >= tutoSequence.length) {
 				balao.removeEventListener(Event.CLOSE, closeBalao);
 				balao.visible = false;
+				
 			}else {
 				balao.setText(tutoSequence[tutoPos], tutoBaloonPos[tutoPos][0], tutoBaloonPos[tutoPos][1]);
 				balao.setPosition(pointsTuto[tutoPos].x, pointsTuto[tutoPos].y);
+			}
+		}
+		
+		private function closeBalao2(e:Event):void 
+		{
+			tutoPos2++;
+			if (tutoPos2 >= tutoSequence2.length) {
+				balao2.removeEventListener(Event.CLOSE, closeBalao2);
+				balao2.visible = false;
+				
+			}else {
+				balao2.setText(tutoSequence2[tutoPos2], tutoBaloonPos2[tutoPos2][0], tutoBaloonPos2[tutoPos2][1]);
+				balao2.setPosition(pointsTuto2[tutoPos2].x, pointsTuto2[tutoPos2].y);
 			}
 		}
 	}
