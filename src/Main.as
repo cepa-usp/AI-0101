@@ -61,13 +61,20 @@
 			infoScreen.addEventListener(MouseEvent.CLICK, function () { infoScreen.visible = false;} );
 			botoes.creditos.addEventListener(MouseEvent.CLICK, function () { aboutScreen.visible = true; setChildIndex(aboutScreen, numChildren - 1); } );
 			aboutScreen.addEventListener(MouseEvent.CLICK, function () { aboutScreen.visible = false;} );
+			feedbackCerto.botaoOK.addEventListener(MouseEvent.CLICK, function () { feedbackCerto.visible = false; } );
+			feedbackErrado.botaoOK.addEventListener(MouseEvent.CLICK, function () { feedbackErrado.visible = false; } );
 			
+			feedbackCerto.botaoOK.buttonMode = true;
+			feedbackErrado.botaoOK.buttonMode = true;
 			entrada.verResposta.mouseEnabled = false;
 			
 			confirmacao.visible = false;
 			infoScreen.visible = false;
 			aboutScreen.visible = false;
 			entrada.verResposta.alpha = 0.3;
+			
+			feedbackCerto.visible = false;
+			feedbackErrado.visible = false;
 			
 			this.scrollRect = new Rectangle(0, 0, 700, 500);
 			
@@ -204,6 +211,12 @@
 			if (!errouF3 && funcao9.x == funcao3.x && funcao9.y == PONTOS[8].y) pontuacao++;
 			else funcao9.filters = [new GlowFilter(0xFF0000, 1, 6, 6, 2, 20)];
 			
+			if (pontuacao == 9) feedbackCerto.visible = true;
+			else feedbackErrado.visible = true;
+			
+			setChildIndex(feedbackCerto, numChildren - 1);
+			setChildIndex(feedbackErrado, numChildren - 1);
+			
 			pontuacao = Math.round(pontuacao * (100 / 9));
 			
 			entrada.pontuacao_tf.text = String(pontuacao) + " de 100";
@@ -317,9 +330,11 @@
 		
 		private function reset(e:MouseEvent):void 
 		{
-			if (tweenX.isPlaying) return;
+			if (tweenX != null && tweenX.isPlaying) return;
 			
 			respondido = false;
+			feedbackCerto.visible = false;
+			feedbackErrado.visible = false;
 			entrada.verResposta.removeEventListener(MouseEvent.CLICK, resposta);
 			entrada.verResposta.alpha = 1;
 			randomPoint = new HumanRandom(PONTOS);
@@ -487,7 +502,7 @@
 										  "Na segunda linha você deve colocar as derivadas de primeira ordem, f'(x), imediatamente abaixo da função que deu origem a ela.",
 										  "Finalmente, na terceira linha você deve colocar as derivadas de ordem dois, f''(x).",
 										  "Quando você tiver concluído, pressione o botão \"OK\" para verificar sua resposta."];
-		private var tutoSequence2:Array = ["As peças destacadas em vermelho estão erradas; aquelas em verde estão corretas.",
+		private var tutoSequence2:Array = [/*"As peças destacadas em vermelho estão erradas.",*/
 										  "Você pode tentar quantas vezes quiser, basta pressionar em \"novo exercício\"."];
 										  private var tweenX:Tween;
 										  private var tweenY:Tween;
@@ -537,10 +552,10 @@
 				setChildIndex(balao2, numChildren - 1);
 				balao2.visible = false;
 				
-				pointsTuto2 = 	[new Point(250, 170),
+				pointsTuto2 = 	[/*new Point(250, 170),*/
 								new Point(130, 102)];
 								
-				tutoBaloonPos2 = [["", ""],
+				tutoBaloonPos2 = [/*["", ""],*/
 								[CaixaTexto.LEFT, CaixaTexto.FIRST]];
 			}
 			
